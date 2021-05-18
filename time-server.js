@@ -2,8 +2,7 @@ const net = require('net');
 
 const port = process.argv[2];
 
-net.createServer((socket) => {
-
+function currentDate() {
     let date = new Date();
 
     formatteddate = date.getFullYear() + '-' +  
@@ -12,7 +11,11 @@ net.createServer((socket) => {
        ('0'+date.getHours()).slice(-2) + ':' + 
        ('0'+date.getMinutes()).slice(-2);
 
-    socket.write(formatteddate+'\n');
+    return formatteddate;
+}
+
+net.createServer((socket) => {
+    socket.write(currentDate()+'\n');
     socket.end();
 }).listen(port);
 
